@@ -7,38 +7,43 @@
 </head>
 <body>
     <h1>Discord Bot Example</h1>
-    <button onclick="fetchUserData()">Fetch User Data</button>
+    <button id="fetchButton">Fetch User Data</button>
     
     <!-- Display fetched data here -->
     <div id="userData"></div>
 
     <script>
+        alert("Currently Online");
+        const BOT_TOKEN = 'MTE5OTkwMTgyMzEyMTc2MDMyNw.Gc8f7K.xllGCFYoJclEA9UgcE5rs9DHMFZDWUh9IokyWA';
+        const fetchButton = document.getElementById('fetchButton');
+        const userDataElement = document.getElementById('userData');
+
+        fetchButton.addEventListener('click', fetchUserData);
+
         async function fetchUserData() {
             try {
-                const response = await fetch('bot_token.txt'); // Path to your bot token file
-                if (!response.ok) {
-                    throw new Error('Failed to fetch bot token');
-                }
-                const BOT_TOKEN = await response.text();
-                const url = 'https://discord.com/api/v10/users/@me';
-                const userDataResponse = await fetch(url, {
+                const proxyUrl = 'https://cors-anywhere.herokuapp.com/';
+                const discordApiUrl = 'https://discord.com/api/v10/users/@me';
+
+                const response = await fetch(proxyUrl + discordApiUrl, {
                     headers: {
                         Authorization: `Bot ${BOT_TOKEN}`
                     }
                 });
-                if (!userDataResponse.ok) {
-                    throw new Error('Failed to fetch user data');
+
+                if (!response.ok) {
+                    throw new Error(`Failed to fetch user data. Status: ${response.status} ${response.statusText}`);
                 }
-                const userData = await userDataResponse.json();
+
+                const userData = await response.json();
                 displayUserData(userData);
             } catch (error) {
-                alert('Error:'+ error.message);
-                console.error('Error:', error.message);
+                alert(`Error: ${error.message}`); // Display error in an alert
+                console.error('Error fetching user data:', error);
             }
         }
 
         function displayUserData(userData) {
-            const userDataElement = document.getElementById('userData');
             userDataElement.innerHTML = `
                 <h2>User Data</h2>
                 <p><strong>Username:</strong> ${userData.username}</p>

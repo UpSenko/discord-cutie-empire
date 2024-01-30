@@ -13,8 +13,7 @@
     <div id="userData"></div>
 
     <script>
-        alert("Currently Online");
-        const BOT_TOKEN = 'MTE5OTkwMTgyMzEyMTc2MDMyNw.Gc8f7K.xllGCFYoJclEA9UgcE5rs9DHMFZDWUh9IokyWA';
+        const BOT_TOKEN = 'MTE5OTkwMTgyMzEyMTc2MDMyNw.GU3Kaf.4QVfkjF7kPwWL-IsSpTwB8yFIgyHVFhA8f4BMM';
         const fetchButton = document.getElementById('fetchButton');
         const userDataElement = document.getElementById('userData');
 
@@ -22,10 +21,9 @@
 
         async function fetchUserData() {
             try {
-                const proxyUrl = 'https://cors-anywhere.herokuapp.com/';
                 const discordApiUrl = 'https://discord.com/api/v10/users/@me';
 
-                const response = await fetch(proxyUrl + discordApiUrl, {
+                const response = await fetch(discordApiUrl, {
                     headers: {
                         Authorization: `Bot ${BOT_TOKEN}`
                     }

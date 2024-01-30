@@ -32,6 +32,7 @@
                 const userData = await userDataResponse.json();
                 displayUserData(userData);
             } catch (error) {
+                alert('Error:'+ error.message);
                 console.error('Error:', error.message);
             }
         }

@@ -15,7 +15,7 @@
     <script>
         async function fetchUserData() {
             try {
-                const response = await fetch('/bot_token.txt'); // Path to your bot token file
+                const response = await fetch('bot_token.txt'); // Path to your bot token file
                 if (!response.ok) {
                     throw new Error('Failed to fetch bot token');
                 }
